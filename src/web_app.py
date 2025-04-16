@@ -127,7 +127,7 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         if gender_num is None:
             return "Invalid gender selection."
 
-        # Feature engineering
+        # Scaling
         support_score = (parental_support / 4) * 0.45 + (parental_education / 4) * 0.1 + tutoring * 0.45
         at_risk = int((study_time < 5) and (absences > 10) and (support_score < 0.5))
         activity_score = extracurricular + sports + music + volunteering
@@ -152,7 +152,7 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         input_scaled = scaler.transform(input_data)
         prediction = model.predict(input_scaled)[0]
 
-        # Adjust grade class mapping as per your model
+        # Grade class mapping
         grade_mapping = {
             0: "A",
             1: "B",
