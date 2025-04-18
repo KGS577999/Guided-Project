@@ -165,7 +165,7 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         return f"Error during prediction: {str(e)}"
 
 
-#Run the app locally
-'''if __name__ == "__main__":
-    app.run(debug=True)
-'''
+#Run the app
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8050))
+    app.run_server(debug=True, host="0.0.0.0", port=port)
