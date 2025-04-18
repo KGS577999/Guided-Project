@@ -1,0 +1,158 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    padding-bottom: 40px;
+}
+
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-top: 5px solid #4CAF50; /* Adds a green top border */
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+input[type="number"], input[type="text"], select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="number"]:focus, input[type="text"]:focus, select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+div#output {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #17a2b8;
+    font-size: 1.8em;
+}
+
+h4 {
+    color: #007bff;
+    font-size: 1.4em;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 20px;
+}
+
+ul li {
+    margin: 10px 0;
+    color: #6c757d;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Additional responsive design (for smaller screens) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    ul li {
+        font-size: 1em;
+    }
+
+    div#output {
+        margin-top: 30px;
+        padding: 15px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

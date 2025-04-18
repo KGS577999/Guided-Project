@@ -20,12 +20,12 @@ server = app.server
 
 # Layout
 app.layout = html.Div([
-    html.H1("Student Grade Classification Predictor"),
+    html.H1("Student Grade Class Predictor"),
 
     html.Br(), html.Br(),
 
     html.Label("Age:"),
-    dcc.Input(id='age', type='number', value=18, step=1),
+    dcc.Input(id='age', type='number', value=18, step=1, min=0),
 
     html.Br(), html.Br(),
 
@@ -43,21 +43,21 @@ app.layout = html.Div([
         id='parental_education',
         options=[{'label': "None", 'value': 0},
                  {'label': "High School", 'value': 1},
-                 {'label': "Bachelor's", 'value': 2},
-                 {'label': "Master's", 'value': 3},
-                 {'label': "PhD", 'value': 4}],
+                 {'label': "College", 'value': 2},
+                 {'label': "Bachelor's", 'value': 3},
+                 {'label': "Higher Study", 'value': 4}],
         value=0
     ),
 
     html.Br(), html.Br(),
 
     html.Label("Weekly Study Time (hrs):"),
-    dcc.Input(id='study_time', type='number', value=0.0, step=0.01),
+    dcc.Input(id='study_time', type='number', value=0.0, step=1, min=0),
 
     html.Br(), html.Br(),
 
     html.Label("Absences:"),
-    dcc.Input(id='absences', type='number', value=0, step=1),
+    dcc.Input(id='absences', type='number', value=0, step=1, min=0),
 
     html.Br(), html.Br(),
 
@@ -159,7 +159,7 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         predicted_grade = grade_mapping.get(int(prediction), "Unknown")
 
         # Build structured response
-        result = [html.H3(f"Predicted Grade Classification: {predicted_grade}")]
+        result = [html.H3(f"Predicted Grade Class: {predicted_grade}")]
 
         # Recommendations
         recommendations = []
