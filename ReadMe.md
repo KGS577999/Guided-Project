@@ -73,8 +73,8 @@ The model was trained on a dataset (real or synthetic) and saved using `joblib` 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/student-grade-predictor.git
-cd student-grade-predictor
+git clone https://github.com/KGS577999/Guided-Project
+cd Guided-Project
 ```
 
 ### 2. (Optional) Create Virtual Environment
@@ -97,13 +97,13 @@ cd "v src"
 python web_app.py
 ```
 
-Open [http://localhost:8050] in your browser.
+Open http://localhost:8050 in your browser.
 
 ---
 
 ## Model Details
 
-- **Model Type**: (e.g. Random Forest, Gradient Boosting, Neural Network)
+- **Model Type**: (Linear Regression, Random Forest, XGBoost and Neural Network)
 - **Input Features**: 22 total features (raw + engineered)
 - **Scaling**: Preprocessing applied using `StandardScaler` or `MinMaxScaler`
 - **Output**: Discrete grade class: A, B, C, D, or F
