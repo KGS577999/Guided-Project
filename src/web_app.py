@@ -1,16 +1,16 @@
-import dash
-from dash import html, dcc
-from dash.dependencies import Input, Output
-import numpy as np
-import pickle
-import joblib
 import os
+import numpy as np
+import joblib
+import dash
+from dash import dcc, html
+from dash.dependencies import Input, Output
+
+#from sklearn.ensemble import RandomForestClassifier
 
 # Load the saved model
 current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Import model for GradeClass prediction
 model_path = os.path.join(current_dir, '..', 'notebooks', 'best_model.pkl')
+
 model_data = joblib.load(model_path)
 model = model_data["model"]
 scaler = model_data["scaler"]
@@ -121,13 +121,10 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         return "Please fill in all fields."
 
     try:
+        # Preprocessing
         gender_mapping = {"Male": 0, "Female": 1}
         gender_num = gender_mapping.get(gender)
 
-        if gender_num is None:
-            return "Invalid gender selection."
-
-        # Scaling
         support_score = (parental_support / 4) * 0.45 + (parental_education / 4) * 0.1 + tutoring * 0.45
         at_risk = int((study_time < 5) and (absences > 10) and (support_score < 0.5))
         activity_score = extracurricular + sports + music + volunteering
@@ -140,19 +137,19 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         tutoring_study_interaction = tutoring * study_time
         multiple_activities = int(activity_score > 1)
 
-        input_data = np.array([[age, gender_num, parental_education, study_time, absences, tutoring, parental_support,
-                                extracurricular, sports, music, volunteering, support_score, at_risk, activity_score,
-                                absence_study_interaction, parental_support_study_time, study_time_per_absence,
-                                support_per_activity, absences_squared, study_time_squared,
-                                tutoring_study_interaction, multiple_activities]])
+        input_vector = [
+            age, gender_num, parental_education, study_time, absences, tutoring, parental_support,
+            extracurricular, sports, music, volunteering, support_score, at_risk, activity_score,
+            absence_study_interaction, parental_support_study_time, study_time_per_absence,
+            support_per_activity, absences_squared, study_time_squared,
+            tutoring_study_interaction, multiple_activities
+        ]
 
-        if input_data.shape[1] != scaler.mean_.shape[0]:
-            return f"Error: Expected {scaler.mean_.shape[0]} features, but got {input_data.shape[1]}."
-
-        input_scaled = scaler.transform(input_data)
+        # Scale and predict
+        input_array = np.array([input_vector])
+        input_scaled = scaler.transform(input_array)
         prediction = model.predict(input_scaled)[0]
 
-        # Grade class mapping
         grade_mapping = {
             0: "A",
             1: "B",
@@ -162,13 +159,13 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         }
 
         predicted_grade = grade_mapping.get(int(prediction), "Unknown")
-
         return f"Predicted Grade Classification: {predicted_grade}"
 
     except Exception as e:
         return f"Error during prediction: {str(e)}"
 
-''' Run the app locally
-if __name__ == "__main__":
+
+#Run the app locally
+'''if __name__ == "__main__":
     app.run(debug=True)
 '''
