@@ -93,7 +93,7 @@ pip install -r requirements.txt
 ### 4. Run the App
 
 ```bash
-cd "v src"
+cd "src"
 python web_app.py
 ```
 
