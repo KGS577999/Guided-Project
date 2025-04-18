@@ -1,11 +1,9 @@
 import os
-import numpy as np
 import joblib
+import numpy as np
 import dash
-from dash import dcc, html
+from dash import html, dcc
 from dash.dependencies import Input, Output
-
-#from sklearn.ensemble import RandomForestClassifier
 
 # Load the saved model
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -159,11 +157,33 @@ def predict_grade(n_clicks, age, gender, parental_education, study_time, absence
         }
 
         predicted_grade = grade_mapping.get(int(prediction), "Unknown")
-        return f"Predicted Grade Classification: {predicted_grade}"
+
+        # Build structured response
+        result = [html.H3(f"Predicted Grade Classification: {predicted_grade}")]
+
+        # Recommendations
+        recommendations = []
+
+        if study_time < 5:
+            recommendations.append("Increase your weekly study time to at least 5 hours.")
+        if absences > 10:
+            recommendations.append("Reduce absences to improve learning consistency.")
+        if tutoring == 0:
+            recommendations.append("Consider joining a tutoring program.")
+        if parental_support == 0:
+            recommendations.append("Seek more involvement or support from parents/guardians.")
+        if activity_score == 0:
+            recommendations.append("Join extracurricular activities to enhance your motivation.")
+
+        if recommendations:
+            result.append(html.Br())
+            result.append(html.H4("Recommendations:"))
+            result.append(html.Ul([html.Li(rec) for rec in recommendations]))
+
+        return html.Div(result)
 
     except Exception as e:
         return f"Error during prediction: {str(e)}"
-
 
 #Run the app
 if __name__ == "__main__":
