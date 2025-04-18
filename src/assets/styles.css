@@ -22,7 +22,7 @@ h1 {
 
 .container {
     width: 80%;
-    max-width: 900px;
+    max-width: 550px;
     margin: 0 auto;
     padding: 30px;
     background-color: #ffffff;
@@ -155,4 +155,16 @@ ul li {
     button {
         font-size: 14px;
     }
+}
+
+
+
+input[type="number"] {
+    width: 95%;
+    margin: 0 !important;
+}
+
+
+label {
+    margin-top: 15px;
 }
